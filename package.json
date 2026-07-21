@@ -1,0 +1,46 @@
+{
+  "name": "@0xkahi/llm-wiki",
+  "version": "0.0.0",
+  "description": "LLM-WIKI: skills, prompts, and a cli tool for agents to manage your knowledge base",
+  "author": "0xKahi",
+  "license": "MIT",
+  "module": "index.ts",
+  "type": "module",
+  "keywords": [
+    "agent-skills",
+    "cli",
+    "knowledge-base",
+    "okf"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0xKahi/llw.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "llw": "./dist/index.js"
+  },
+  "scripts": {
+    "biome": "biome check ./src",
+    "lint": "bun biome",
+    "lint:fix": "bun biome --write",
+    "type-check": "tsc --noEmit",
+    "check": "bun run lint:fix && bun run type-check",
+    "build": "bun build src/index.ts --outdir dist --target bun --minify"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.5",
+    "@types/bun": "latest",
+    "@types/node": "^24.0.0",
+    "bun-types": "latest",
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@0xkahi/cli-dye": "^1.1.0",
+    "@clack/prompts": "^1.5.1",
+    "@toon-format/toon": "^2.3.0",
+    "commander": "^15.0.0"
+  }
+}

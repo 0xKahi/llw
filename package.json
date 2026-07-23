@@ -17,7 +17,8 @@
     "url": "https://github.com/0xKahi/llw.git"
   },
   "files": [
-    "dist"
+    "dist",
+    "skill-data"
   ],
   "bin": {
     "llw": "./dist/index.js"
@@ -28,7 +29,9 @@
     "lint:fix": "bun biome --write",
     "type-check": "tsc --noEmit",
     "check": "bun run lint:fix && bun run type-check",
-    "build": "bun build src/index.ts --outdir dist --target bun --minify"
+    "build": "bun build src/index.ts --outdir dist --target bun --minify",
+    "test": "bun test",
+    "prepack": "bun run build"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.5",

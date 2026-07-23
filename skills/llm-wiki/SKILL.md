@@ -16,6 +16,7 @@ Each category comes with it own dedicated skill to manage the knowledge in that 
 **Guards**
 - you should only ever view/update/edit one category at a time
 - if unsure on which category to use, ask the user for clarification 
+- This file is a discovery stub, not the usage guide. Before running any `llw` command, load the actual workflow/skill content from the CLI:
 
 ## Common Commands
 

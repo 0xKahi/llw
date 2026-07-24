@@ -246,6 +246,9 @@ llw bundle update \
 **pre-requisites**
 - read OKF_SPEC_REF for the original spec  
 
+**Guards**
+- DO NOT manually add concept properties/metadata, all allowed concept properties/metadata is available in both the `concept create` and `concept update` commands 
+
 ### How To Create
 
 ```shell
@@ -344,7 +347,8 @@ summary: <short_summary_of_what_is_being_updated>
 
 ### Updating Concept Properties
 
-only done when needed to update concept metadata, not the concept content itself 
+only done when needed to update concept metadata, not the concept content itself. 
+this **SHOULD BE** the only entry point for updating concept metadata/properties, as it will handle validation of the concept properties/metadata structure
 
 ```bash
 # only pass the property options you want to change, the rest are left untouched
@@ -373,6 +377,7 @@ llw concept update bet-table --bundle "bundles/some-backend/database" --timestam
 
 **Notes:**
 - use `--timestamp` to log concept updated time when editing a concept content
+- all command options are optional (except: `--bundle`), you only need to pass the options you want to change, the rest are left untouched
 
 ---
 

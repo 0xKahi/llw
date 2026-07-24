@@ -1,5 +1,6 @@
 export interface SkillRegistryEntry {
   description: string;
+  alias?: string;
   testOnly?: boolean;
 }
 
@@ -14,7 +15,8 @@ const SKILL_ENTRIES: Record<string, SkillRegistryEntry> = {
     testOnly: true,
   },
   'llw-okf': {
-    description: 'the core llm-wiki skill to update, create, enrich, bundles and concepts based on the okf standard',
+    alias: 'core',
+    description: 'the core llm-wiki skill to update, create, enrich, bundles and concepts based on the OKF standard',
   },
 };
 

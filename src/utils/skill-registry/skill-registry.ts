@@ -15,30 +15,53 @@ type SkillRegistryOptions = {
 
 export class SkillRegistry {
   private readonly entries: ReadonlyMap<string, SkillRegistryEntry>;
+  private readonly aliases: ReadonlyMap<string, string>;
   private readonly skillsDataPathOverride: string | undefined;
   private packageRoot: string | undefined;
 
   constructor(entries: SkillEntryInput[], options: SkillRegistryOptions = {}) {
     const registryMap = new Map<string, SkillRegistryEntry>();
+    const aliasMap = new Map<string, string>();
     for (const { skillName, entry } of entries) {
       if (registryMap.has(skillName)) {
         throw new Error(`Duplicate skill entry: ${skillName}`);
       }
       registryMap.set(skillName, entry);
     }
+
+    // Alias validation runs after all skill names are registered so that
+    // alias-vs-name collision detection does not depend on entry order.
+    for (const { skillName, entry } of entries) {
+      const alias = entry.alias;
+      if (!alias) continue;
+      if (alias === skillName) {
+        throw new Error(`Skill alias must differ from its skill name: ${skillName}`);
+      }
+      if (registryMap.has(alias)) {
+        throw new Error(`Skill alias collides with a skill name: ${alias}`);
+      }
+      const existingSkillName = aliasMap.get(alias);
+      if (existingSkillName !== undefined) {
+        throw new Error(`Duplicate skill alias: ${alias} (claimed by "${existingSkillName}" and "${skillName}")`);
+      }
+      aliasMap.set(alias, skillName);
+    }
+
     this.entries = registryMap;
+    this.aliases = aliasMap;
     this.skillsDataPathOverride = options.skillsDataPath;
   }
 
-  has(skillName: string): boolean {
-    return this.entries.has(skillName);
+  has(nameOrAlias: string): boolean {
+    return this.entries.has(this.resolveSkillName(nameOrAlias));
   }
 
   getSkillsDataPath(): string {
     return this.skillsDataPathOverride ?? join(this.getPackageRoot(), SKILLS_DATA_DIRECTORY);
   }
 
-  getSkillPath(skillName: string): string {
+  getSkillPath(nameOrAlias: string): string {
+    const skillName = this.resolveSkillName(nameOrAlias);
     this.getEntry(skillName);
 
     const skillPath = join(this.getSkillsDataPath(), skillName);
@@ -49,7 +72,8 @@ export class SkillRegistry {
     return skillPath;
   }
 
-  getSkillFilePath(skillName: string): string {
+  getSkillFilePath(nameOrAlias: string): string {
+    const skillName = this.resolveSkillName(nameOrAlias);
     const skillFilePath = join(this.getSkillPath(skillName), SKILL_FILE_NAME);
     if (!existsSync(skillFilePath) || !statSync(skillFilePath).isFile()) {
       throw new Error(`Skill file not found: ${skillName}/${SKILL_FILE_NAME}`);
@@ -58,7 +82,8 @@ export class SkillRegistry {
     return skillFilePath;
   }
 
-  getSkill(skillName: string): string {
+  getSkill(nameOrAlias: string): string {
+    const skillName = this.resolveSkillName(nameOrAlias);
     this.getEntry(skillName);
 
     const skillPath = this.getSkillPath(skillName);
@@ -82,6 +107,10 @@ export class SkillRegistry {
     SkillRegistry.assertPathWithinSkillFolder(realReferencePath, realSkillPath, referencePath);
 
     return resolvedPath;
+  }
+
+  private resolveSkillName(nameOrAlias: string): string {
+    return this.aliases.get(nameOrAlias) ?? nameOrAlias;
   }
 
   private getEntry(skillName: string): SkillRegistryEntry {

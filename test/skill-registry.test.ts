@@ -60,6 +60,49 @@ some other gibberish text
   test('throws for an unknown skill', () => {
     expect(() => registry.getSkill('missing-skill')).toThrow('Unknown skill: missing-skill');
   });
+
+  test('throws for an input that is neither a skill name nor an alias', () => {
+    expect(registry.has('not-an-alias')).toBe(false);
+    expect(() => registry.getSkillPath('not-an-alias')).toThrow('Unknown skill: not-an-alias');
+  });
+});
+
+describe('SkillRegistry aliases', () => {
+  test('resolves lookups by alias to the canonical skill', () => {
+    expect(registry.has('core')).toBe(true);
+    expect(registry.getSkill('core')).toBe(registry.getSkill('llw-okf'));
+    expect(registry.getSkillPath('core')).toBe(registry.getSkillPath('llw-okf'));
+    expect(registry.getSkillPath('core')).toBe(join(registry.getSkillsDataPath(), 'llw-okf'));
+    expect(registry.getSkillFilePath('core')).toBe(registry.getSkillFilePath('llw-okf'));
+  });
+
+  test('skills without aliases are not aliased by their own name', () => {
+    expect(registry.getSkillPath('test-skill')).toBe(join(registry.getSkillsDataPath(), 'test-skill'));
+  });
+
+  test('throws when an alias equals its own skill name', () => {
+    const entries = [{ skillName: 'self-alias', entry: { description: 'fixture', alias: 'self-alias' } }];
+
+    expect(() => new SkillRegistry(entries)).toThrow('Skill alias must differ from its skill name: self-alias');
+  });
+
+  test('throws when an alias collides with another skill name', () => {
+    const entries = [
+      { skillName: 'alpha-skill', entry: { description: 'fixture', alias: 'beta-skill' } },
+      { skillName: 'beta-skill', entry: { description: 'fixture' } },
+    ];
+
+    expect(() => new SkillRegistry(entries)).toThrow('Skill alias collides with a skill name: beta-skill');
+  });
+
+  test('throws when two skills declare the same alias', () => {
+    const entries = [
+      { skillName: 'alpha-skill', entry: { description: 'fixture', alias: 'shared' } },
+      { skillName: 'beta-skill', entry: { description: 'fixture', alias: 'shared' } },
+    ];
+
+    expect(() => new SkillRegistry(entries)).toThrow('Duplicate skill alias: shared (claimed by "alpha-skill" and "beta-skill")');
+  });
 });
 
 describe('SkillRegistry reference safety', () => {

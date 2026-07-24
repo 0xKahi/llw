@@ -38,7 +38,7 @@ This is the core workflow for managing the `llm-wiki` vault, it stores and organ
 Unless user specifies a specific workflow, This workflow should be used as the default for adding, updating, and searching knowledge in the vault. 
 
 ```bash
-llw skills view llw-okf 
+llw skills view core 
 ```
 
 **Trigger KeyWords**

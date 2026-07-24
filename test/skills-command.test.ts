@@ -49,6 +49,22 @@ describe('llw skills view', () => {
     expect(result.stdout).toBe(`${registry.getSkillPath('test-skill')}\n`);
   });
 
+  test('prints the same content when viewing by alias', async () => {
+    const result = await runCli('skills', 'view', 'core');
+
+    expect(result.exitCode).toBe(0);
+    expect(result.stderr).toBe('');
+    expect(result.stdout).toBe(registry.getSkill('llw-okf'));
+  });
+
+  test('--path prints the canonical skill folder when viewing by alias', async () => {
+    const result = await runCli('skills', 'view', 'core', '--path');
+
+    expect(result.exitCode).toBe(0);
+    expect(result.stderr).toBe('');
+    expect(result.stdout).toBe(`${registry.getSkillPath('llw-okf')}\n`);
+  });
+
   test('rejects an unknown skill', async () => {
     const result = await runCli('skills', 'view', 'missing-skill');
 

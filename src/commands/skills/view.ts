@@ -9,7 +9,7 @@ export class SkillsViewCommand implements CommandStrategy {
   readonly config = {
     name: 'view',
     description: 'Output a bundled skill or its installed folder path',
-    args: [{ name: '<name>', description: 'registered skill name' }],
+    args: [{ name: '<name>', description: 'registered skill name or alias' }],
     options: [{ flag: '--path', description: 'output the absolute skill folder path' }],
   };
 

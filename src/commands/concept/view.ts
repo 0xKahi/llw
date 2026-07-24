@@ -47,7 +47,7 @@ export class ConceptViewCommand implements CommandStrategy {
       fullpath: fullConceptPath,
     };
 
-    const output = formatOutput(payload, { type: format, compact: options.compact });
+    const output = formatOutput(payload, { type: format, compact: !options.pretty });
 
     console.log(output);
   }

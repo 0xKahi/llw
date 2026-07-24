@@ -12,9 +12,9 @@ description: >
 
 # LLW-OKF Skill 
 
-a custom variation of the Open Knowledge Format (OKF) bundles - that is optimized for obsidian supported mono-repo knowlegebases
+A custom variation of the Open Knowledge Format (OKF) bundles - that is optimized for obsidian supported mono-repo knowlegebases
 
-the difference between the original OKF spec and this skill is that, this skill
+The difference between the original OKF spec and this skill is that, this skill
 is optimized for obsidian supported mono-repo knowledgebases, and uses a custom cli `llw` to
 create, validate, and enrich knowledge bundles and concepts.
 

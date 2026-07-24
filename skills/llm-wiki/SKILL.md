@@ -2,54 +2,50 @@
 name: llm-wiki 
 description: >
   Create, Update and Manage llm-wiki Knowledge Base - an obsidian vault that stores knowledge/notes/plans as markdown files with YAML
-  frontmatter. Use when the user mentions "knowledge bundle" 'OKF', 'Open Knowledge Format',
+  frontmatter. Use when the user mentions 'OKF', 'Open Knowledge Format',
   'knowledge bundle', 'OKF bundle', 'create a knowledge base for agents',
-  'validate OKF', 'convert to OKF', 'enrich knowledge docs', 'agent-readable knowledge', 'LLM wiki', 'knowledge catalog', 'kcmd'.
+  'convert to OKF', 'enrich knowledge docs', 'LLM wiki', 'knowledge catalog', 'kcmd'.
 ---
 
 # LLM WIKI
 
-`llw` A Custom Obsidian Vault Cli for agents to manage the `llm-wiki` vault, which stores markdown files representing different types of knowledge that  
-users/agents can reference. the `llm-wiki` vault have different distinct categories for storing knowledge, each having its own structure and rules/guides to follow.
-Each category comes with it own dedicated skill to manage the knowledge in that category. 
+An Opinionated Obsidian Vault, that functions as a global persistent Knowledge Base for agents to manage, store, and reference knowledge. 
+The vault, has strict formats and guidelines and is managed entirely through the `llw` CLI tool (unless specified otherwise).
 
-**Guards**
-- you should only ever view/update/edit one category at a time
-- if unsure on which category to use, ask the user for clarification 
-- This file is a discovery stub, not the usage guide. Before running any `llw` command, load the actual workflow/skill content from the CLI:
+The `llw` CLI tool, provides a set of workflows/skills for managing the vault, and are the only supported way to create, update or find knowledge in the vault. 
+Provided workflows/skills are mutually exclusive from each other, and are designed to be used one at a time, having its own set of rules and guidelines
+on managing specific sections of the vault.
+
+**Guardrails**
+- Vault Management **SHOULD ONLY** be done by following one of the provided workflows.
+- **DO NOT** cross contaminate different workflows instructions, only 1 should be strictly followed at a time.
+- This file is a discovery stub, not the usage guide. Always match user request to one of the workflows, load the actual workflow/skill content from the CLI before fulfilling the request.
 
 ## Common Commands
 
 **To Get Full Vault Path** 
-mainly usefull when you want to read or edit files in the vault
-
 ```bash
-# returns full-path to vault
 llw vault path
 ```
 
-## Skills 
+## Skills & Workflows 
 
 The CLI serves skill content that always matches the installed version, so instructions never go stale. The content in this stub cannot change between releases, which is why it just points at `skills view <name>`.
 
 ### llw-okf 
 
-the core skill of the llm-wiki vault, it is a custom variation of the Open Knowledge Format (OKF) bundles - that is optimized for obsidian supported mono-repo knowlegebases.
-It categorizes organizational knowledge as bundles & concepts stored in the `bundles` folder at the root of the vault 
+This is the core workflow for managing the `llm-wiki` vault, it stores and organizes knowledge in bundles and concepts based on the Open Knowledge Format (OKF) specification. 
+Unless user specifies a specific workflow, This workflow should be used as the default for adding, updating, and searching knowledge in the vault. 
 
-this is the default skill to use and default category to store knowledge, when user does not specify a category. 
-etc. "add this to my wiki", "look at my wiki/knowledge base for xyz". assume the user is referring to the llw-okf category unless they specify otherwise 
-
-**Load Skill**
 ```bash
 llw skills view llw-okf 
 ```
 
-**Trigger Key Words**
+**Trigger KeyWords**
 - 'okf'
 - 'bundle'
 - 'concept'
 
 ### Pending
-... pending more skills
+...pending more skills
 

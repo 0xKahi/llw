@@ -22,7 +22,7 @@ export class BundleListCommand implements CommandStrategy {
     const bundles = await VaultCli.getAllBundles();
     const bundleJson = { bundles: bundles };
 
-    const output = formatOutput(bundleJson, { type: format, compact: opts.compact });
+    const output = formatOutput(bundleJson, { type: format, compact: !opts.pretty });
     console.log(output);
   }
 }

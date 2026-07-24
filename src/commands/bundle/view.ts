@@ -38,7 +38,7 @@ export class BundleViewCommand implements CommandStrategy {
       childBundles: children,
     };
 
-    const output = formatOutput(payload, { type: format, compact: opts.compact });
+    const output = formatOutput(payload, { type: format, compact: !opts.pretty });
     console.log(output);
   }
 

@@ -9,7 +9,7 @@ export const OUTPUT_FORMAT_OPTIONS = {
 export type OutputFormat = ObjectValues<typeof OUTPUT_FORMAT_OPTIONS>;
 export type FormatOpt = {
   format: string;
-  compact?: boolean;
+  pretty?: boolean;
 };
 
 export const OUTPUT_FORMAT_COMMAND_OPT_FLAGS: CommandOptionsProps[] = [
@@ -19,12 +19,7 @@ export const OUTPUT_FORMAT_COMMAND_OPT_FLAGS: CommandOptionsProps[] = [
     default: OUTPUT_FORMAT_OPTIONS.toon,
   },
   {
-    flag: '--compact -c',
-    description: 'compact output (default: true)',
-    default: true,
-  },
-  {
-    flag: '--no-compact',
-    description: 'dont compact output (optional)',
+    flag: '--pretty',
+    description: 'pretty-print output (optional)',
   },
 ];

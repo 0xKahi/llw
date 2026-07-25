@@ -32,7 +32,7 @@ llw vault path
 
 The CLI serves skill content that always matches the installed version, so instructions never go stale. The content in this stub cannot change between releases, which is why it just points at `skills view <name>`.
 
-### llw-okf 
+### Core (llw-okf)
 
 This is the core workflow for managing the `llm-wiki` vault, it stores and organizes knowledge in bundles and concepts based on the Open Knowledge Format (OKF) specification. 
 Unless user specifies a specific workflow, This workflow should be used as the default for adding, updating, and searching knowledge in the vault. 
@@ -41,10 +41,7 @@ Unless user specifies a specific workflow, This workflow should be used as the d
 llw skills view core 
 ```
 
-**Trigger KeyWords**
-- 'okf'
-- 'bundle'
-- 'concept'
+**Trigger Words:** 'okf', 'bundle', 'concept'
 
 ### Pending
 ...pending more skills

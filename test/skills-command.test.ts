@@ -12,6 +12,7 @@ let externalWorkingDirectory: string;
 const runCli = async (...args: string[]) => {
   const subprocess = Bun.spawn([process.execPath, cliPath, ...args], {
     cwd: externalWorkingDirectory,
+    env: { ...process.env, LLW_TEST_SKILLS: '1' },
     stdout: 'pipe',
     stderr: 'pipe',
   });

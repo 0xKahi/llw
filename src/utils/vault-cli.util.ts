@@ -1,5 +1,4 @@
-import { createHash } from 'node:crypto';
-import { readdir, readFile } from 'node:fs/promises';
+import { readdir } from 'node:fs/promises';
 import { $ } from 'bun';
 import { BUNDLE_OBSIDIAN_BASE, EXCLUDE_FILES } from '../constants';
 import type { BundleBaseMetadata, BundleMetadata } from '../types/bundle-metadata.type';
@@ -15,6 +14,13 @@ export class VaultCli {
   static async getVaultPath() {
     const shell = VaultCli.vaultBaseCli(['vault', 'info=path']);
     return (await shell.text()).trim();
+  }
+
+  static async getTaskCount(path: string, type: 'pending' | 'completed'): Promise<number> {
+    const status = type === 'pending' ? ' ' : 'x';
+    const shell = VaultCli.vaultBaseCli(['tasks', `path=${path}`, `status=${status}`, 'total']);
+    const output = await shell.text();
+    return Number(output.trim());
   }
 
   static async getBundleFolders() {
@@ -54,34 +60,6 @@ export class VaultCli {
       .map(e => replaceFileExtension({ fileName: e.name, extension: '.md' }))
       .filter(name => !EXCLUDE_FILES.includes(name));
     return concepts;
-  }
-
-  static async getBundleHashes({
-    bundle,
-    vaultPath,
-  }: {
-    bundle: string;
-    vaultPath: string;
-  }): Promise<{ bundle: string; concepts: Array<{ path: string; hash: string }> }> {
-    const fullBundlePath = `${vaultPath}/${bundle}`;
-    const entries = await readdir(fullBundlePath, { withFileTypes: true });
-    const conceptFiles = entries.filter(
-      e => e.isFile() && e.name.endsWith('.md') && !EXCLUDE_FILES.includes(replaceFileExtension({ fileName: e.name, extension: '.md' })),
-    );
-
-    const concepts = await Promise.all(
-      conceptFiles.map(async entry => {
-        const content = await readFile(`${fullBundlePath}/${entry.name}`);
-        const hash = createHash('md5').update(content).digest('hex');
-        return { path: `${bundle}/${entry.name}`, hash };
-      }),
-    );
-    concepts.sort((a, b) => a.path.localeCompare(b.path));
-
-    const bundleHash = createHash('md5')
-      .update(concepts.map(concept => concept.hash).join(''))
-      .digest('hex');
-    return { bundle: bundleHash, concepts };
   }
 
   static async getConceptProperties({ bundle, concept }: { bundle: string; concept: string }): Promise<Record<string, unknown>> {

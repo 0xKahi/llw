@@ -10,7 +10,7 @@ description: >
 
 The `llm-wiki` vault stores knowledge bundles in the `bundles/` directory, at the root of the vault. Each knowledge bundle is a folder that can contain 
 concepts, and other child bundles, every bundles folder contains a `bundle.md` file that marks the root of that bundle and contains the knowledge bundles metadata.
-This skill is used to sync all knowledge bundles across the vault, find outOfSync `bundles.md` files, and enrich them with its directory of contents. 
+This skill is used to sync all knowledge bundles across the vault, find outOfSync `bundle.md` files, and enrich them with its directory of contents. 
 
 ## Quick Reference
 

@@ -1,7 +1,7 @@
 import { CONCEPT_TEMPLATE } from '../../constants';
-import { BundleFormatter } from '../../utils/bundle-formatter.util';
 import type { CommandStrategy } from '../../utils/commander/command-strategy';
 import { OkfBundleGuard } from '../../utils/guards/okf-bundle.guard';
+import { ObsidianFormatter } from '../../utils/obsdian-formatter.util';
 import { VaultCli } from '../../utils/vault-cli.util';
 
 type ConceptCreateOptions = {
@@ -57,7 +57,7 @@ export class ConceptCreateCommand implements CommandStrategy {
     }
 
     if (tags) {
-      await VaultCli.setProperties({ path: conceptPath, name: 'tags', value: BundleFormatter.parseInputToObsidianTagProperty(tags), type: 'tags' });
+      await VaultCli.setProperties({ path: conceptPath, name: 'tags', value: ObsidianFormatter.parseInputToTagProperty(tags), type: 'tags' });
     }
 
     console.info('INFO: Full path to concept file for writing content:', `'${fullConceptPath}'`);

@@ -20,32 +20,6 @@ export class BundleFormatter {
     };
   }
 
-  static parseInputToObsidianTagProperty(tags: string): string {
-    const tagList = tags
-      .split(',')
-      .map(tag => tag.trim())
-      .filter(tag => tag.length > 0)
-      .map(tag => `"${tag}"`);
-    const tagValue = `[${tagList.join(',')}]`;
-    return tagValue;
-  }
-
-  /**
-   * Replacer function for compact TOON output that converts triggers and tags arrays into comma-separated strings.
-   * @param key - The key of the property being processed.
-   * @param value - The value of the property being processed.
-   * @returns The modified value for the triggers and tags properties, or the original value for other properties.
-   */
-  static compactToonReplacer(key: string, value: unknown): unknown {
-    if (key === 'triggers' && Array.isArray(value)) {
-      return value.length > 0 ? value.join(', ') : null;
-    }
-    if (key === 'tags' && Array.isArray(value)) {
-      return value.length > 0 ? value.join(', ') : null;
-    }
-    return value;
-  }
-
   /** Extracts title from an obsidian wikilink, e.g. `[[bundles/shuffle/bundle|shuffle]]` -> `shuffle` */
   static parseParentTitle(parent: string | null): string | null {
     if (!parent) return null;

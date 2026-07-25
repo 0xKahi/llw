@@ -18,6 +18,10 @@ const SKILL_ENTRIES: Record<string, SkillRegistryEntry> = {
     alias: 'core',
     description: 'the core llm-wiki skill to update, create, enrich, bundles and concepts based on the OKF standard',
   },
+  'llw-okf-sync': {
+    alias: 'bundle-sync',
+    description: `sync all knowledge bundles in the vault, get outdated bundle.md files for agents to update with directory of contents`,
+  },
 };
 
 export function getSkillEntries({ testSkills }: { testSkills: boolean }): SkillEntryInput[] {

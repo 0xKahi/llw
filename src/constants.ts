@@ -2,7 +2,7 @@ import { getSkillEntries } from './utils/skill-registry/registry';
 import { SkillRegistry } from './utils/skill-registry/skill-registry';
 
 // TODO: set testSkills to false once non-test skills ship
-export const skillRegistry = new SkillRegistry(getSkillEntries({ testSkills: true }));
+export const skillRegistry = new SkillRegistry(getSkillEntries({ testSkills: false }));
 
 export const EXCLUDE_FILES = ['bundle', 'log', 'index'];
 export const BUNDLE_OBSIDIAN_BASE = 'bases/bundles-index.base';

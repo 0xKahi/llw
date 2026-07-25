@@ -3,6 +3,7 @@ import { $ } from 'bun';
 import { BUNDLE_OBSIDIAN_BASE, EXCLUDE_FILES } from '../constants';
 import type { BundleBaseMetadata, BundleMetadata } from '../types/bundle-metadata.type';
 import { BundleFormatter } from './bundle-formatter.util';
+import { ObsidianFormatter, type ObsidianTaskStatus } from './obsdian-formatter.util';
 import { replaceFileExtension } from './replace-file-extension.util';
 
 export class VaultCli {
@@ -16,9 +17,8 @@ export class VaultCli {
     return (await shell.text()).trim();
   }
 
-  static async getTaskCount(path: string, type: 'pending' | 'completed'): Promise<number> {
-    const status = type === 'pending' ? ' ' : 'x';
-    const shell = VaultCli.vaultBaseCli(['tasks', `path=${path}`, `status=${status}`, 'total']);
+  static async getTaskCount(path: string, type: ObsidianTaskStatus): Promise<number> {
+    const shell = VaultCli.vaultBaseCli(['tasks', `path=${path}`, `status=${ObsidianFormatter.getTasksStatusSymbol(type)}`, 'total']);
     const output = await shell.text();
     return Number(output.trim());
   }

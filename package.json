@@ -18,7 +18,8 @@
   },
   "files": [
     "dist",
-    "skill-data"
+    "skill-data",
+    "obsidian-setup"
   ],
   "bin": {
     "llw": "./dist/index.js"

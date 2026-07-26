@@ -1,0 +1,18 @@
+views:
+  - type: cards
+    name: main
+    filters:
+      and:
+        - file.inFolder("bundles")
+        - file.name == "bundle"
+    order:
+      - title
+      - description
+      - triggers
+      - file.folder
+      - parent
+    columnSize:
+      note.trigger: 372
+    rowHeight: medium
+    cardSize: 220
+    imageAspectRatio: 1

@@ -3,6 +3,7 @@ import { SkillRegistry } from './utils/skill-registry/skill-registry';
 
 // Test-only skills are exposed to the CLI when LLW_TEST_SKILLS=1 (used by the test suite).
 export const skillRegistry = new SkillRegistry(getSkillEntries({ testSkills: process.env.LLW_TEST_SKILLS === '1' }));
+// export const skillRegistry = new SkillRegistry(getSkillEntries({ testSkills: true }));
 
 export const EXCLUDE_FILES = ['bundle', 'log', 'index'];
 export const BUNDLE_OBSIDIAN_BASE = 'bases/bundles-index.base';

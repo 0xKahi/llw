@@ -14,7 +14,7 @@ type SkillRegistryOptions = {
 };
 
 export class SkillRegistry {
-  private readonly entries: ReadonlyMap<string, SkillRegistryEntry>;
+  readonly entries: ReadonlyMap<string, SkillRegistryEntry>;
   private readonly aliases: ReadonlyMap<string, string>;
   private readonly skillsDataPathOverride: string | undefined;
   private packageRoot: string | undefined;

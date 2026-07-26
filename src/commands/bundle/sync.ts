@@ -71,7 +71,7 @@ export class BundleSyncCommand implements CommandStrategy {
     }
 
     const lines = [
-      dye.bold(`Bundle Sync Manifest`),
+      dye.colorize({ fg: 'magenta' }).bold(`Bundle Sync Manifest`),
       '',
       '════════════════════════════════════════════════════════════',
       dye.bold('Summary:'),

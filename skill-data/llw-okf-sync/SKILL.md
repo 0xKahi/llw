@@ -166,20 +166,20 @@ using the current bundle `path` field along with the full path to the vault, rea
 ```md
 # <bundle-title> (capitalize first letter)
 
-## Concepts
 ...directory list of all concepts in the bundle.
 
 ## Child Bundles
 ...directory list of all child bundles in the bundle.
 ```
 
+**Note:** for directory links description, do not reuse the `description` field, instead format it to make it more human readable
+as the `description` field is meant for agents to read but for, bundle sync, we want to make it more human readable for the user. 
+
 ##### Updating/Adding Concepts Section
 
 based on the returned `concepts` and its metadata from the `llw bundle view` command, structure the concepts section in the `bundle.md` file as follows: 
 
 ```markdown
-## Concepts
-
 ### Section / Group Heading
 
 - [Title 1](relative-url-1) - short description of concept 1
@@ -213,7 +213,7 @@ based on the returned `childBundles` and its metadata from the `llw bundle view`
 group the childBundles by `description` fields into logical sections. and remove any child bundle links that are no longer in the bundle.
 
 #### Marking Task as Completed
-- once the `bundle.md` file has been updated, mark the task as completed in the taskList file by changing the task status from pending `[ ]` to completed `[x]`. 
+- once the `bundle.md` file has been updated, edit the taskList file and mark the task  as completed, pending `[ ]` to completed `[x]`. 
 - move on to the next pending task in the taskList file and repeat the process until all tasks are completed or ignored.
 - once all tasks are no longer pending, move on to the next Step.
 

@@ -23,24 +23,35 @@ export class VaultInfoCommand implements CommandStrategy {
       conceptMapCount.set(bundle.folder, concepts.length);
     }
 
-    const lines: string[] = [dye.colorize('bundles', { fg: dye.hex(COLORS.blue) })];
+    const bundleTreeLines: string[] = [dye.colorize('bundles', { fg: dye.hex(COLORS.blue) })];
     const roots = childrenByParent.get(null) ?? [];
     roots.forEach((bundle, i) => {
       this.renderNode({
         bundle,
         childrenByParent,
         bundleConceptCountMap: conceptMapCount,
-        lines,
+        lines: bundleTreeLines,
         prefix: '',
         numberPath: `${i + 1}`,
         isLast: i === roots.length - 1,
       });
     });
 
+    const lines = [
+      dye.colorize({ fg: 'magenta' }).bold(`LLM WIKI INFO`),
+      `path: ${dye.colorize({ fg: 'cyan' }).underline(vaultPath)}`,
+      '',
+      dye.colorize({ fg: 'brightBlue' }).bold('Knowledge Bundles:'),
+      '────────────────────────────────────────────────────────────',
+      dye.bold('Summary:'),
+      ` ${dye.colorize('●', { fg: dye.hex(COLORS.blue) })} Total Bundles: ${map.size}`,
+      ` ${dye.colorize('●', { fg: 'brightYellow' })} Total Concepts: ${totalConcepts}`,
+      '',
+      ...bundleTreeLines,
+      '════════════════════════════════════════════════════════════',
+    ];
+
     console.log(lines.join('\n'));
-    console.log('');
-    console.log(`TOTAL_BUNDLES: ${dye.colorize(`${map.size}`, { fg: 'brightGreen' })}`);
-    console.log(`TOTAL_CONCEPTS: ${dye.colorize(`${totalConcepts}`, { fg: 'brightYellow' })}`);
   }
 
   /** Groups bundles by parent folder (null = root). Orphans (missing parent) are treated as roots. */

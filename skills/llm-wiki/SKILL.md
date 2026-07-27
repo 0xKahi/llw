@@ -41,7 +41,7 @@ Unless user specifies a specific workflow, This workflow should be used as the d
 llw skills view core 
 ```
 
-**Trigger Words:** 'okf', 'bundle', 'concept'
+**Trigger Words:** 'okf', 'bundle', 'concept', 'parse raw'
 
 ---
 ### Bundle Sync (llw-okf-sync) 

@@ -1,6 +1,7 @@
 import type { CommandStrategy } from '../../utils/commander/command-strategy';
 import { BundleCreateCommand } from './create';
 import { BundleListCommand } from './list';
+import { BundleRenameCommand } from './rename';
 import { BundleSyncCommand } from './sync';
 import { BundleTreeCommand } from './tree';
 import { BundleUpdateCommand } from './update';
@@ -17,6 +18,7 @@ export class BundleCommand implements CommandStrategy {
       new BundleCreateCommand(),
       new BundleUpdateCommand(),
       new BundleSyncCommand(),
+      new BundleRenameCommand(),
     ],
   };
 }

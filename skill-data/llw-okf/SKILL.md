@@ -220,7 +220,11 @@ reccomend the following
 
 ---
 
-## 4. Updating Bundle Properties
+## 4. Updating Bundles
+
+### Updating Bundle Properties
+
+**Note:** this command does not let you update the bundle title, as bundle title has to match the bundle folder name, use the `llw bundle rename` command to rename a bundle title and its folder name
 
 ```bash
 # only pass the property options you want to change, the rest are left untouched
@@ -237,6 +241,24 @@ llw bundle update \
 llw bundle update \
   --bundle "bundles/some-backend/database" \
   --description "knowledge bundle for database and migration concepts of some backend"
+```
+
+### Renaming Bundle
+
+**Note:** this command updates both the bundle title and its folder name, as bundle title has to match the bundle folder name
+the command will return you the new full bundle folder path and bundleFolder
+
+```bash
+llw bundle rename \
+  --bundle "<bundle_folder>" \
+  --title "<new_bundle_title>"
+```
+
+**example:**
+```bash
+llw bundle rename \
+  --bundle "bundles/some-backend/database" \
+  --title "data-base"
 ```
 
 ---

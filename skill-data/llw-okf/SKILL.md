@@ -474,12 +474,15 @@ when user request include
 - store llw raw 
 - etc...
 
+**Guardrails:** before creating new bundles or creating/updating concepts, always wait for user confirmation. 
+
 #### Smart detection
 
 based on the document contents you should 
-- you should first try and determine which bundle to store the new concept in
-- you should determine if the concept should be newly created or it should update an existing concept
-- if applicable you should add backlinks to other concepts if they are realated
+- first determine if document contents should be split into multiple concepts or stored as a single concept
+- determine which bundle(s) to store the new concept(s) in
+- determine if the concept(s) should be newly created or it should update an existing concept
+- if applicable you should add backlinks to other concepts(s) if they are realated
 
 #### After Proccessing Raw document
 

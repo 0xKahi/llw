@@ -318,7 +318,7 @@ after creating the concept, fullpath to concept file will be returned, for you t
 - if yes see `See §6.` for updating concept and contents
 - how are we going to organize concepts into a directory tree that makes sense for the domain.
 
-#### 3. Return Fromat for Concept Creation 
+#### 3. Return Format for Concept Creation 
 
 ```
 creating new concept(s) for <purpose>
@@ -474,23 +474,49 @@ when user request include
 - store llw raw 
 - etc...
 
-**Guardrails:** before creating new bundles or creating/updating concepts, always wait for user confirmation. 
-
 #### Smart detection
 
-based on the document contents you should 
+based on each document contents you should 
 - first determine if document contents should be split into multiple concepts or stored as a single concept
-- determine which bundle(s) to store the new concept(s) in
+- determine which bundle(s) to store the new concept(s) in or should it be in a new bundle 
 - determine if the concept(s) should be newly created or it should update an existing concept
 - if applicable you should add backlinks to other concepts(s) if they are realated
+
+
+#### Before Adding Document Concepts(s) 
+
+before creating new bundles or creating/updating concepts, always wait for user confirmation.
+
+**Return Format**
+```
+parsing raw document into new concept(s)
+document: <raw_document>
+logical splits: <number_of_concept_to_split_data_into>
+
+New Bundles (only if applicable)
+---
+index: 1
+bundle: <bundle_name>
+summary: <short_summary_of_what_new_bundle_is_for>
+
+Concepts
+---
+index: 1
+bundle: <bundle_name>
+concept: <concept_name>
+reason: <logical_concept_data_split_reasoning_if_applicable>
+action: <create/update> 
+
+index: 2 
+bundle: <bundle_name>
+concept: <concept_name>
+reason: <logical_concept_data_split_reasoning_if_applicable>
+action: <create/update> 
+
+(yes/no)?
+```
 
 #### After Proccessing Raw document
 
 remove proccessed document from `raw/` folder
 
-when no bundle can be determined, return the following to user
-```
-no bundle exists that matches <raw_document> content 
-do you want to create a new bundle for this document?
-or select a existing bundle?
-```

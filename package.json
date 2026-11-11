@@ -45,6 +45,7 @@
     "@0xkahi/cli-dye": "^1.1.0",
     "@clack/prompts": "^1.5.1",
     "@toon-format/toon": "^2.3.0",
+    "@typesafe-ai/sdk": "^0.7.0",
     "commander": "^15.0.0"
   }
 }

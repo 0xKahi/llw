@@ -21,7 +21,7 @@ const CRITERIA = {
 const MAX_CONCEPT_CHARS = 60_000;
 const MAX_REQUEST_CHARS = 160_000;
 
-type SearchOpts = FormatOpt & { question: string };
+type SearchOpts = FormatOpt & { query: string };
 
 type ConceptInput = { bundle: string; concept: string; fullpath: string; content: string };
 type ScoredConcept = Record<string, unknown> & { fullpath: string; probability: number };
@@ -32,7 +32,7 @@ export class JevSearchCommand implements CommandStrategy {
     name: 'search',
     description: 'Ask Jev which bundles and concepts are likely to contain information about a question',
     options: [
-      { flag: '--question -q <question>', description: 'question to search the knowledge base for', required: true },
+      { flag: '--query -q <query>', description: 'question to search the knowledge base for', required: true },
       ...OUTPUT_FORMAT_COMMAND_OPT_FLAGS,
     ],
   };
@@ -44,12 +44,12 @@ export class JevSearchCommand implements CommandStrategy {
     }
 
     const [bundleMap, vaultPath] = await Promise.all([VaultCli.getBundleMap(), VaultCli.getVaultPath()]);
-    const candidates = await JevUtil.searchBundles({ bundleMap, question: opts.question });
+    const candidates = await JevUtil.searchBundles({ bundleMap, question: opts.query });
 
-    const results = await Promise.all(candidates.map(bundle => this.searchBundle({ question: opts.question, bundle, vaultPath })));
+    const results = await Promise.all(candidates.map(bundle => this.searchBundle({ question: opts.query, bundle, vaultPath })));
     const bundles = results.filter((b): b is SearchBundleResult => b !== null);
 
-    console.log(formatOutput({ question: opts.question, bundles }, { type: format, compact: !opts.pretty }));
+    console.log(formatOutput({ question: opts.query, bundles }, { type: format, compact: !opts.pretty }));
   }
 
   /** Filters a bundle's concepts with Jev. Returns null when no concept qualifies. */

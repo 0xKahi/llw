@@ -5,16 +5,13 @@ import { JevUtil } from '../../utils/jev.util';
 import { formatOutput } from '../../utils/tokenizer.util';
 import { VaultCli } from '../../utils/vault-cli.util';
 
-type BundleSearchOpts = FormatOpt & { question: string };
+type BundleSearchOpts = FormatOpt & { query: string };
 
 export class JevBundleSearchCommand implements CommandStrategy {
   readonly config = {
     name: 'bundle_search',
     description: 'Ask Jev which bundles are likely to contain information about a question',
-    options: [
-      { flag: '--question -q <question>', description: 'question to ask about each bundle', required: true },
-      ...OUTPUT_FORMAT_COMMAND_OPT_FLAGS,
-    ],
+    options: [{ flag: '--query -q <query>', description: 'question to ask about each bundle', required: true }, ...OUTPUT_FORMAT_COMMAND_OPT_FLAGS],
   };
 
   async execute(opts: BundleSearchOpts): Promise<void> {
@@ -24,7 +21,7 @@ export class JevBundleSearchCommand implements CommandStrategy {
     }
 
     const bundleMap = await VaultCli.getBundleMap();
-    const bundles = await JevUtil.searchBundles({ bundleMap, question: opts.question });
-    console.log(formatOutput({ question: opts.question, bundles }, { type: format, compact: !opts.pretty }));
+    const bundles = await JevUtil.searchBundles({ bundleMap, question: opts.query });
+    console.log(formatOutput({ question: opts.query, bundles }, { type: format, compact: !opts.pretty }));
   }
 }

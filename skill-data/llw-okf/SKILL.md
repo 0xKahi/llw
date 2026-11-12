@@ -55,6 +55,26 @@ for the full spec read OKF_SPEC_REF
 
 ## 1. Common Commands
 
+### Jev Commands
+
+the llw cli tool provides jev commands to help filtering and searching for concepts in the knowledgebase without having to manually look through bundles list.  
+
+**Check Jev Availability**
+```bash
+llw jev status 
+```
+
+if jev is available it should be used in favor over the llw bundle/concept commands, as it is more optimized for searching and filtering concepts in the knowledgebase
+
+**Jev Search For Bundles/Concepts**
+
+```bash
+llw jev search --query <question> 
+# example: llw jev search --query "docs for user database schema"
+```
+
+highly effecient search tool based on the query it uses jev to filter out relevant bundles from `llw bundle ls`, then takes all relevant bundles and its concepts content 
+parses it into jev and returns all relevant concepts and its bundles. It outputs the results the same way as `llw bundle view` command for all relevant bundles and only includes the relevant concepts that matches the query with probability scores attached. 
 
 ### Bundle Commands
 
@@ -407,7 +427,14 @@ llw concept update bet-table --bundle "bundles/some-backend/database" --timestam
 
 ### Bundle/Concept Selection 
 
-see `See §1.` for listing all bundles and their metadata, and viewing a bundles concepts
+see `See §1.` for 
+- checking if jev is available 
+- searching for bundles/concepts with jev
+- listing all bundles and their metadata
+- viewing a bundles concepts
+
+**NOTE:** if JEV is available, always use `jev search` it will heavily filter out all irelevant bundles and concepts greatly reducing your descision hierarchy 
+compared to manually doing `llw bundle ls` and `llw bundle view`
 
 #### Which Bundle To Condider?
 

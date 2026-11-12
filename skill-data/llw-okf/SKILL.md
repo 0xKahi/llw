@@ -433,8 +433,8 @@ see `See §1.` for
 - listing all bundles and their metadata
 - viewing a bundles concepts
 
-**NOTE:** if JEV is available, always use `jev search` it will heavily filter out all irelevant bundles and concepts greatly reducing your descision hierarchy 
-compared to manually doing `llw bundle ls` and `llw bundle view`
+**IMPORTANT:** if JEV is available, always use `jev search` it will heavily filter out all irelevant bundles and concepts greatly reducing your descision hierarchy 
+compared to manually doing `llw bundle ls` and `llw bundle view` or manually grep searching for bundles/concepts
 
 #### Which Bundle To Condider?
 

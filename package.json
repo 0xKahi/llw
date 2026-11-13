@@ -25,6 +25,8 @@
     "llw": "./dist/index.js"
   },
   "scripts": {
+    "dev": "bun run src/index.ts",
+    "start": "bun run dist/index.js",
     "biome": "biome check ./src",
     "lint": "bun biome",
     "lint:fix": "bun biome --write",
@@ -32,10 +34,14 @@
     "check": "bun run lint:fix && bun run type-check",
     "build": "bun build src/index.ts --outdir dist --target bun --minify",
     "test": "bun test",
-    "prepack": "bun run build"
+    "prepack": "bun run build",
+    "release": "changeset publish",
+    "version": "changeset version",
+    "changeset": "changeset"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.5",
+    "@changesets/cli": "^3.0.3",
     "@types/bun": "latest",
     "@types/node": "^24.0.0",
     "bun-types": "latest",

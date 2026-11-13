@@ -53,3 +53,15 @@ llw skills view bundle-sync
 
 **Trigger Words:** 'bundle sync', 'sync wiki' 
 
+---
+### LLM WIKI SETUP (llw-vault-setup)
+
+This workflow is for setting up the `llm-wiki` vault, or checking and repairing an existing one
+
+```bash
+llw skills view llw-vault-setup
+```
+
+**Trigger Words:** 'setup llm-wiki', 'setup vault', 'install llm-wiki vault', 'llw setup'
+
+

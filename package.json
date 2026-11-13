@@ -1,6 +1,6 @@
 {
   "name": "@0xkahi/llw",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "LLM-WIKI: skills, prompts, and a cli tool for agents to manage your knowledge base",
   "author": "0xKahi",
   "license": "MIT",

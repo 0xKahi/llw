@@ -57,24 +57,10 @@ for the full spec read OKF_SPEC_REF
 
 ### Jev Commands
 
-the llw cli tool provides jev commands to help filtering and searching for concepts in the knowledgebase without having to manually look through bundles list.  
-
 **Check Jev Availability**
 ```bash
 llw jev status 
 ```
-
-if jev is available it should be used in favor over the llw bundle/concept commands, as it is more optimized for searching and filtering concepts in the knowledgebase
-
-**Jev Search For Bundles/Concepts**
-
-```bash
-llw jev search --query <question> 
-# example: llw jev search --query "docs for user database schema"
-```
-
-highly effecient search tool based on the query it uses jev to filter out relevant bundles from `llw bundle ls`, then takes all relevant bundles and its concepts content 
-parses it into jev and returns all relevant concepts and its bundles. It outputs the results the same way as `llw bundle view` command for all relevant bundles and only includes the relevant concepts that matches the query with probability scores attached. 
 
 ### Bundle Commands
 
@@ -423,18 +409,48 @@ llw concept update bet-table --bundle "bundles/some-backend/database" --timestam
 
 ---
 
-## Workflows
+## 7. Searching for Concepts
 
-### Bundle/Concept Selection 
+how to search for concepts in the knowledgebase, and how to determine which concept to read based on its metadata
+
+**pre-requisites**
+- check if jev mode is available
+
+### JEV MODE (recommended) 
+
+highly effecient search tool based on the query it uses jev to filter out relevant bundles from `llw bundle ls`, 
+then takes all relevant bundles and its concepts content parses it into jev and returns all relevant concepts and its bundles. 
+It outputs the results the same way as `llw bundle view` command for all relevant bundles and only includes the relevant concepts that matches the query with probability scores attached. 
+
+```bash
+llw jev search --query <question>
+```
+
+**example:**
+```bash
+# searching for all concepts related to user database schema
+llw jev search --query "docs for user database schema"
+
+# searching for api docs 
+llw jev search --query "api documation for company xyz"
+```
+
+results from jev search will return a filtered list of relevant bundles and their concepts for you to descide which concept to read, look at `Bundle/Concept Selection` workflow for decision on which concept to read.
+
+### Manual Approach
 
 see `See §1.` for 
-- checking if jev is available 
-- searching for bundles/concepts with jev
 - listing all bundles and their metadata
 - viewing a bundles concepts
 
-**IMPORTANT:** if JEV is available, always use `jev search` it will heavily filter out all irelevant bundles and concepts greatly reducing your descision hierarchy 
-compared to manually doing `llw bundle ls` and `llw bundle view` or manually grep searching for bundles/concepts
+list all bundles and their metadata and decide which bundle(s) to consider base on its metadata, then view the bundle and its concepts and decide which concept to read based on its metadata.
+look at `Bundle/Concept Selection` workflow for decision on which concept to read.
+
+---
+
+## Workflows
+
+### Bundle/Concept Selection 
 
 #### Which Bundle To Condider?
 
@@ -468,7 +484,7 @@ bundles considered: <list_of_bundles_considered>
 concepts: <list_of_concepts_considered>
 ```
 
-#### Displaying Bundle For User Selection
+### Displaying Bundle For User Selection
 
 see `See §1.` for Displaying bundles in a tree format, tool output has numbered titles so user can easily pick bundle etc.
 

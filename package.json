@@ -1,11 +1,13 @@
 {
-  "name": "@0xkahi/llm-wiki",
+  "name": "@0xkahi/llw",
   "version": "0.0.0",
   "description": "LLM-WIKI: skills, prompts, and a cli tool for agents to manage your knowledge base",
   "author": "0xKahi",
   "license": "MIT",
-  "module": "index.ts",
   "type": "module",
+  "engines": {
+    "bun": ">=1.4.0"
+  },
   "keywords": [
     "agent-skills",
     "cli",
@@ -14,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/0xKahi/llw.git"
+    "url": "git+https://github.com/0xKahi/llw.git"
   },
   "files": [
     "dist",

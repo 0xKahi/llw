@@ -3,7 +3,7 @@ import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { SkillEntryInput, SkillRegistryEntry } from './registry';
 
-const PACKAGE_NAME = '@0xkahi/llm-wiki';
+const PACKAGE_NAME = '@0xkahi/llw';
 const SKILLS_DATA_DIRECTORY = 'skill-data';
 const SKILL_FILE_NAME = 'SKILL.md';
 const REFERENCES_PREFIX = 'sk-references/';

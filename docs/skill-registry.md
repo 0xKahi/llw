@@ -178,7 +178,7 @@ The constructor throws if the same skill name appears twice in the entries array
 
 ### Package-root discovery
 
-`SkillRegistry` walks up the directory tree from its own source file until it finds a `package.json` with `"name": "@0xkahi/llm-wiki"` alongside a `skill-data/` folder. This makes skill paths stable regardless of where the CLI is invoked from.
+`SkillRegistry` walks up the directory tree from its own source file until it finds a `package.json` with `"name": "@0xkahi/llw"` alongside a `skill-data/` folder. This makes skill paths stable regardless of where the CLI is invoked from.
 
 ---
 

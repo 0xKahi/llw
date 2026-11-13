@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "@0xkahi/llm-wiki",
+      "name": "@0xkahi/llw",
       "dependencies": {
         "@0xkahi/cli-dye": "^1.1.0",
         "@clack/prompts": "^1.5.1",

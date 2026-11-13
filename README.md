@@ -41,9 +41,9 @@ On top of that, `llw` ships a suite of **agent skills** (installable with `npx s
 ### 1. Install the CLI
 
 ```bash
-bun add -g @0xkahi/llm-wiki
+bun add -g @0xkahi/llw
 # or
-npm install -g @0xkahi/llm-wiki   # Bun must still be on your PATH
+npm install -g @0xkahi/llw   # Bun must still be on your PATH
 ```
 
 Verify the install:

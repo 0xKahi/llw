@@ -4,6 +4,7 @@ import { BundleCommand } from './commands/bundle';
 import { ConceptCommand } from './commands/concept';
 import { JevCommand } from './commands/jev';
 import { SkillsCommand } from './commands/skills';
+import { UpgradeCommand } from './commands/upgrade';
 import { VaultCommand } from './commands/vault';
 import { CURRENT_VERSION } from './meta';
 import { CommandEx } from './utils/commander/command-ex';
@@ -14,7 +15,7 @@ const mainCommand: CommandStrategy = {
     name: 'llw',
     description: 'LLM Wiki CLI',
     version: CURRENT_VERSION,
-    subCommands: [new BundleCommand(), new ConceptCommand(), new JevCommand(), new SkillsCommand(), new VaultCommand()],
+    subCommands: [new BundleCommand(), new ConceptCommand(), new JevCommand(), new SkillsCommand(), new UpgradeCommand(), new VaultCommand()],
   },
 };
 

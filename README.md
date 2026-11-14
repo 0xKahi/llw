@@ -53,6 +53,8 @@ llw --version
 llw skills list
 ```
 
+Run `llw upgrade` to update the CLI and its bundled skills to the latest published version.
+
 ### 2. Install the agent skills
 
 ```bash
@@ -201,6 +203,18 @@ Commands marked with † accept `--format, -f <toon|json>` (default `toon`) and 
 | --- | --- |
 | `skills list` (`ls`) `[--json]` | List the bundled agent skills. |
 | `skills view <name\|alias> [--path]` | Print a skill's instructions (or its folder path with `--path`). |
+
+#### `llw upgrade`
+
+| Command | Description |
+| --- | --- |
+| `upgrade [version] [--check]` | Update the CLI and bundled skills, or report installed and target versions without installing with `--check`. |
+
+Without a version, `llw upgrade` resolves `latest` and never downgrades an installed newer version. An explicit version (for example, `llw upgrade 0.1.0`) permits a downgrade and warns before installing. An equal version is a successful no-op.
+
+Updates use the global package manager that installed `llw` (bun, npm, pnpm, or yarn). If the install method is unknown (for example, a source checkout or `bunx`/`npx` run), the command prints manual bun and npm install commands to stderr and exits with code `1`. `--check` never installs or requires a known install method.
+
+Set `LLW_NPM_REGISTRY` to override the npm registry used for version resolution (default: `https://registry.npmjs.org`).
 
 Run `llw <command> --help` for full details on any command. Errors are written to stderr and exit with code `1`, so stdout stays safe to parse.
 
